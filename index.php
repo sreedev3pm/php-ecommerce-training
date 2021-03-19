@@ -1,3 +1,6 @@
+<?php
+include("./models/products.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,33 +12,28 @@
 </head>
 <body>
         <?php
-            $fruitcollection=array(
-                array(
-                    "name" => " apple 1 kg",
-                    "image"=> "img/apple.jpg",
-                    "price"=> "70 rs"
-
-                ),
-                array(
-                    "name" => " orange 1 kg",
-                    "image"=> "img/orange.jpg",
-                    "price"=> "60 rs"
-
-                )
-
-                );
-
-
-        foreach ($fruitcollection as $fruit) { ?>
-        <div class="item">
+            $model = new product();
+            $result =$productcollection;
+            if ($result->num_rows > 0) {
+                
+                // output data of each row
+                while($row = $newresult->fetch_assoc()) { ?>
+                   <div class="item">
             <div class="imagecontainer">
-                 <img src="<?php echo $fruit["image"] ?>" alt="">
+                 <img src="<?php echo $row["image"] ?>" alt="">
             </div>
-            <h3><?php echo $fruit["name"] ?></h3>
-            <h5><?php echo $fruit["price"] ?></h5>
+            <h3><?php echo $row["name"] ?></h3>
+            <h5><?php echo $row["price"] ?></h5>
             <input type="button" value="Add To Cart">
-        </div>
-        <?php } 
+        </div> 
+        <?php     
+        
+            }
+              } else {
+                echo "0 results";
+              }
         ?>
+       
+      
 </body>
 </html>
