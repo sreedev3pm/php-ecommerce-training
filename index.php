@@ -12,19 +12,32 @@ include("./models/products.php");
 </head>
 <body>
         <?php
-            $model = new product();
-            $result =$productcollection;
+            $id=$_GET["id"];   
+          
+            $model = new product($id);
+            $result =$model->productcollection;
+            if (isset($id)) { ?>
+           
+            <a href="index.php">go back</a>
+            <?php
+          }
+
             if ($result->num_rows > 0) {
                 
                 // output data of each row
-                while($row = $newresult->fetch_assoc()) { ?>
+                while($row = $result->fetch_assoc()) { ?>
                    <div class="item">
             <div class="imagecontainer">
                  <img src="<?php echo $row["image"] ?>" alt="">
             </div>
             <h3><?php echo $row["name"] ?></h3>
             <h5><?php echo $row["price"] ?></h5>
-            <input type="button" value="Add To Cart">
+            <form action="index.php"  method="get">
+            <input type="hidden" name="id" value="<?=$row["entity_id"];?>" />
+            <input type="submit" value="view product">
+            </form>
+            
+            </a> 
         </div> 
         <?php     
         

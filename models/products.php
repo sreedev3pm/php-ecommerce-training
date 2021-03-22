@@ -7,13 +7,13 @@ class product{
         if($id){
            
             $sql="SELECT * FROM catalog WHERE entity_id=$id";
-            $db->database($sql);
+            $db->query($sql);
         
         }
         else{
             
             $sql="SELECT * FROM catalog";
-            $db->database($sql);
+            $db->query($sql);
 
         }
        $this->productcollection=$db->result ;

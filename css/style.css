@@ -8,6 +8,7 @@
     justify-content:center;
 }
 .item{
+    padding-top: 2em;
     background-color: #708090;
     text-align:center;
     margin-top:100px;
