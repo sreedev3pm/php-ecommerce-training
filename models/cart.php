@@ -1,6 +1,6 @@
 <?php
 include("./database.php");
-class product{
+class cart{
     public $productcollection;
     function __construct($id=null){
         $db=new database();
@@ -12,7 +12,7 @@ class product{
         }
         else{
             
-            $sql="SELECT entity_id,name,price,image FROM catalog";
+            $sql="SELECT * FROM catalog";
             $db->query($sql);
 
         }
