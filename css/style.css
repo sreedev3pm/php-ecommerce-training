@@ -6,9 +6,11 @@
 .items{
     display:flex;
     justify-content:center;
+    width: 100%;
 }
 .item{
     padding-top: 2em;
+    padding-bottom: 2em;
     background-color: #708090;
     text-align:center;
     margin-top:100px;
@@ -21,7 +23,27 @@
     width:100%;
     height:100%;
 }
-body{
-    display:flex;
-    justify-content:center;
+#cartContainer{
+    text-align: center;
+    padding-left: 5em;
+    padding-right:5em;
+    padding-bottom: 2em;
+    padding-top:2em;
+}
+.cart{
+    background-color: #708090;
+    padding-left: 5em;
+    padding-right:5em;
+    padding-bottom: 2em;
+    padding-top:2em;
+}
+.cart-item{
+    
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+}
+.cart-item img{
+    height: 50px;
+    width: auto;
 }

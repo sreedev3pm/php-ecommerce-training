@@ -1,5 +1,5 @@
 <?php
-include("./models/products.php");
+ include('./models/products.php');
 
 ?>
 <!DOCTYPE html>
@@ -26,13 +26,13 @@ include("./models/products.php");
               $products = new Product();
            }?>
            
-            
+            <div class="items">
             <?php
           
 
             if ($result->num_rows > 0) {
                 
-                // output data of each row
+
                 while($row = $result->fetch_assoc()) { ?>
                    <div class="item">
             <div class="imagecontainer">
@@ -43,8 +43,8 @@ include("./models/products.php");
             <h5><?php echo $row["price"] ?></h5>
             <form action="index.php"  method="get">
             <input type="hidden" name="id" value="<?=$row["entity_id"];?>" />
+            <input type="submit" value="view product"/>
 
-            <input type="submit" value="view product">
             </form>
             <input data-id="<?php echo $row["entity_id"] ?>" class="add-to-cart" type="button" value="Add to Cart" />
         </div> 
@@ -56,12 +56,15 @@ include("./models/products.php");
                 echo "0 results";
               }
         ?>
-       
-      
-</body>
+        </div>
+       <div id="cartContainer">
+        <?php 
+        include('./cart.php') ;
+        ?>
+    </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-    $(document).ready(function(){
+   $(document).ready(function(){
         $(".add-to-cart").click(function(){
             let id = $(this).data("id");
             $.post("controllers/CartController.php",
@@ -69,10 +72,36 @@ include("./models/products.php");
                 entity_id: id
             },
             function(data, status){
-                alert("Data: " + data + "\nStatus: " + status);
+                if(data == "success") {
+                    $.get("cart.php", function(data){
+                        document.getElementById("cartContainer").innerHTML = data;
+                    });
+                }
             });
         });
     });
 
     </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+   $(document).ready(function(){
+        $(".delete-from-cart").click(function(){
+            let id = $(this).data("id");
+            $.post("controllers/DeleteController.php",
+            {
+                item_id: id
+            },
+            function(data, status){
+                if(data == "success") {
+                    $.get("cart.php", function(data){
+                        document.getElementById("cartContainer").innerHTML = data;
+                    });
+                }
+            });
+        });
+    });
+
+    </script> 
+</body>
+
 </html>

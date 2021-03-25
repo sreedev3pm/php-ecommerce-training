@@ -2,7 +2,7 @@
 include('../models/Cart.php');
 
 
-$id = $_POST["entity_id"];
+$id = $_POST["item_id"];
 try {
     $cartObject = new Cart();
 } catch (\Exception $th) {
@@ -10,7 +10,7 @@ try {
 }
 
 
-if($cartObject->addToCart($id)) {
+if($cartObject->removeFromCart($id)) {
     echo "success";
 } else {
     echo "error";
