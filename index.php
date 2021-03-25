@@ -19,6 +19,7 @@
             $model = new product($id);
             $result =$model->productcollection;
             if(isset($_GET["id"])) {
+                $flag=1;
               $products = new Product($_GET["id"]);?>
               <a href="index.php">go back</a>
               <?php
@@ -41,11 +42,18 @@
             <h3><?php echo $row["name"] ?></h3>
             <p><?php echo isset($row["description"]) ? $row["description"] : ""  ?></p>
             <h5><?php echo $row["price"] ?></h5>
+            <?php if (isset($row["description"])){
+                echo " ";
+            }
+            
+            else
+            {?>
             <form action="index.php"  method="get">
             <input type="hidden" name="id" value="<?=$row["entity_id"];?>" />
             <input type="submit" value="view product"/>
 
             </form>
+            <?php } ?>
             <input data-id="<?php echo $row["entity_id"] ?>" class="add-to-cart" type="button" value="Add to Cart" />
         </div> 
             
@@ -79,13 +87,10 @@
                 }
             });
         });
+        
     });
 
-    </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-   $(document).ready(function(){
-        $(".delete-from-cart").click(function(){
+    $( document ).on( "click", ".delete-from-cart", function() {
             let id = $(this).data("id");
             $.post("controllers/DeleteController.php",
             {
@@ -99,7 +104,9 @@
                 }
             });
         });
-    });
+  // $(document).ready(function(){
+     
+    //});
 
     </script> 
 </body>

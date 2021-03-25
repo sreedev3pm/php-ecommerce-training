@@ -2,7 +2,7 @@
  class database{ 
     protected $connection;
 
-    function __construct($server = 'localhost', $username = 'root', $password = 'iamgod123', $db = 'fruit_market') {
+    function __construct($server = 'localhost', $username = 'root', $password = '', $db = 'fruit_market') {
         $this->connection = new mysqli($server,$username,$password,$db);
 
         // Check connection
