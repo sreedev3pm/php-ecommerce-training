@@ -14,8 +14,12 @@
 </head>
 <body>
         <?php
-              
-            $id=$_GET["id"];
+            if(isset($_GET["id"])) {
+                $id=$_GET["id"];
+            }
+            else{
+                $id=null;
+            }
             $model = new product($id);
             $result =$model->productcollection;
             if(isset($_GET["id"])) {
