@@ -117,7 +117,9 @@
             },
             function(data,status){
                 if(data == "success") {
-                    $.get("index.php", function(data));
+                    
+                        location.reload(true);
+                    
                 
                 
                 }

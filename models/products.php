@@ -18,10 +18,10 @@ class product{
         }
        $this->productcollection=$db->result ;
     }
-    function __deleteItem($id)
+    function deleteItem($id)
     {   $db=new database();
         $sql="DELETE FROM catalog WHERE entity_id=$id"; 
-        $db->query($sql);
+        
 
         return $db->runQuery($sql);
     }
