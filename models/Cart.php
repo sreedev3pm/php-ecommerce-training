@@ -19,7 +19,7 @@ class Cart {
             if(isset($qty1)){
                 $sql="UPDATE cart2
                 SET qty=qty+1
-                WHERE item_id=$id"; 
+                WHERE php_session_id=\"$s_id\" AND item_id=$id"; 
             }
             else{
                 $sql="INSERT INTO cart2 (php_session_id,item_id,qty)
