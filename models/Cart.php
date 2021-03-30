@@ -13,9 +13,19 @@ class Cart {
         $db = new database();
         if($id) {
             $s_id =session_id();
-            $sql = "INSERT INTO cart2 (php_session_id, item_id, qty)
-                    VALUES (\"$s_id\", $id, 1)";
-
+            $testsql="SELECT qty FROM cart2 WHERE item_id=$id";
+            $qty1=$db->query($testsql);
+            #$qty1=$result1->fetch_assoc();
+            if(isset($qty1)){
+                $sql="UPDATE cart2
+                SET qty=qty+1
+                WHERE item_id=$id"; 
+            }
+            else{
+                $sql="INSERT INTO cart2 (php_session_id,item_id,qty)
+            VALUES(\"$s_id\",$id,1)";
+            }
+           
             return $db->runQuery($sql);
         } 
     }
