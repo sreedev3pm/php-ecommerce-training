@@ -13,7 +13,7 @@ class Cart {
         $db = new database();
         if($id) {
             $s_id =session_id();
-            $sql = "INSERT INTO cart (php_session_id, item_id, qty)
+            $sql = "INSERT INTO cart2 (php_session_id, item_id, qty)
                     VALUES (\"$s_id\", $id, 1)";
 
             return $db->runQuery($sql);
@@ -23,7 +23,7 @@ class Cart {
         $db = new database();
         if($id) {
             $s_id =session_id();
-            $sql = "DELETE FROM cart WHERE php_session_id=\"$s_id\" AND item_id=$id";
+            $sql = "DELETE FROM cart2 WHERE php_session_id=\"$s_id\" AND item_id=$id";
 
             return $db->runQuery($sql);
         } 
@@ -32,15 +32,15 @@ class Cart {
         $db = new database();
         if($s_id) {
             $sql = "SELECT
-            cart.item_id,
+            cart2.item_id,
             catalog.image,
             catalog.name,
-            SUM(cart.qty) AS row_qty,
-            (SUM(cart.qty)*catalog.price) AS row_price
-          FROM `cart`
+            SUM(cart2.qty) AS row_qty,
+            (SUM(cart2.qty)*catalog.price) AS row_price
+          FROM `cart2`
         LEFT JOIN `catalog`
-        ON cart.item_id = catalog.entity_id
-        WHERE cart.php_session_id = \"$s_id\"
+        ON cart2.item_id = catalog.entity_id
+        WHERE cart2.php_session_id = \"$s_id\"
         GROUP BY item_id";
             $this->cart = $db->query($sql);
         }

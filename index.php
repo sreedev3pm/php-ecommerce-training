@@ -59,6 +59,7 @@
             </form>
             <?php } ?>
             <input data-id="<?php echo $row["entity_id"] ?>" class="add-to-cart" type="button" value="Add to Cart" />
+            <input data-id="<?php echo $row["entity_id"] ?>" class="delete-item" type="button" value="Delete" />
         </div> 
             
         <?php     
@@ -81,7 +82,7 @@
             let id = $(this).data("id");
             $.post("controllers/CartController.php",
             {
-                entity_id: id
+                id: id,action:"add"
             },
             function(data, status){
                 if(data == "success") {
@@ -96,15 +97,29 @@
 
     $( document ).on( "click", ".delete-from-cart", function() {
             let id = $(this).data("id");
-            $.post("controllers/DeleteController.php",
+            $.post("controllers/CartController.php",
             {
-                item_id: id
+                id: id,action:"delete"
             },
             function(data, status){
                 if(data == "success") {
                     $.get("cart.php", function(data){
                         document.getElementById("cartContainer").innerHTML = data;
                     });
+                }
+            });
+        });
+        $( document ).on( "click", ".delete-item", function() {
+            let id = $(this).data("id");
+            $.post("controllers/ProductController.php",
+            {
+                id: id
+            },
+            function(data,status){
+                if(data == "success") {
+                    $.get("index.php", function(data));
+                
+                
                 }
             });
         });
