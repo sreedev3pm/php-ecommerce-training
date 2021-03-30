@@ -13,7 +13,7 @@ class Cart {
         $db = new database();
         if($id) {
             $s_id =session_id();
-            $testsql="SELECT qty FROM cart2 WHERE item_id=$id";
+            $testsql="SELECT qty FROM cart2 WHERE WHERE php_session_id=\"$s_id\" AND item_id=$id";
             $qty1=$db->query($testsql);
             #$qty1=$result1->fetch_assoc();
             if(isset($qty1)){
